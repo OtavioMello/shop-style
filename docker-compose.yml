@@ -1,0 +1,67 @@
+version: '3'
+
+services:
+  customer-db: 
+    image: postgres:14-alpine 
+    container_name: customer-db
+    restart: always
+    environment:
+      - POSTGRES_DB=customer-db 
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+    ports:
+      - 5432:5432
+
+  payment-db:
+    image: postgres:14-alpine 
+    container_name: payment-db
+    restart: always
+    environment:
+      - POSTGRES_DB=payment-db 
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+    ports:
+      - 5433:5432
+
+  catalog-db:
+    image: postgres:14-alpine 
+    container_name: catalog-db
+    restart: always
+    environment:
+      - POSTGRES_DB=catalog-db 
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+    ports:
+      - 5434:5432
+
+  order-db:
+    image: tutum/mongodb 
+    container_name: order-db
+    restart: always
+    environment:
+      - MONGO_DATABASE="order-db" 
+      - MONGODB_USER=root
+      - MONGODB_PASS=root
+    ports:
+      - 27017:27017
+      - 28017:28017
+
+  audit-db:
+    image: tutum/mongodb  
+    container_name: audit-db
+    restart: always
+    environment:
+      - MONGO_DATABASE="order-db" 
+      - MONGODB_USER=root
+      - MONGODB_PASS=root
+    ports:
+      - 27018:27017
+      - 28018:28017
+
+  rabbit-mq:
+    image: rabbit:3-management
+    container_name: rabbit-mq
+    ports:
+      - 5672:5672
+      - 25676:25676
+      - 15672:15672
