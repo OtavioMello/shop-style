@@ -25,6 +25,7 @@ public class Customer {
     private String email;
     private String password;
     private boolean active;
-    @OneToMany(mappedBy = "customerId")
+    @OneToMany
+    @JoinColumn(name = "customerId", referencedColumnName = "id")
     private List<Address> addresses;
 }

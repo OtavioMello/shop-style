@@ -1,25 +1,26 @@
-package br.com.project.shopstyle.mscustomer.entity;
+package br.com.project.shopstyle.mscustomer.dto;
 
 import br.com.project.shopstyle.mscustomer.constants.State;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-@Entity @Data @AllArgsConstructor @NoArgsConstructor
-public class Address {
+@Data @AllArgsConstructor @NoArgsConstructor
+public class UpdateAddressFORM {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Enumerated(EnumType.STRING)
+    @NotNull
     private State state;
+    @NotBlank
     private String city;
+    @NotBlank
     private String district;
+    @NotBlank
     private String number;
+    @NotBlank
     private String cep;
     private String complement;
-    private Long customerId;
 
 }

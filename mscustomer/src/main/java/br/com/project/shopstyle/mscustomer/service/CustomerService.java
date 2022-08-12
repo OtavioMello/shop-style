@@ -1,9 +1,6 @@
 package br.com.project.shopstyle.mscustomer.service;
 
-import br.com.project.shopstyle.mscustomer.dto.CustomerDTO;
-import br.com.project.shopstyle.mscustomer.dto.CustomerFORM;
-import br.com.project.shopstyle.mscustomer.dto.UpdateCustomerFORM;
-import br.com.project.shopstyle.mscustomer.dto.UpdatePasswordFORM;
+import br.com.project.shopstyle.mscustomer.dto.*;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
@@ -12,7 +9,7 @@ import java.net.URI;
 public interface CustomerService {
     URI postUser(CustomerFORM customerDTO);
 
-    CustomerDTO getCustomerById(Long id);
+    CustomerAddressDTO getCustomerById(Long id);
 
     CustomerDTO updateCustomerById(Long id, UpdateCustomerFORM updateCustomerFORM);
 

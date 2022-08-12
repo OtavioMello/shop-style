@@ -1,9 +1,7 @@
 package br.com.project.shopstyle.mscustomer.service;
 
-import br.com.project.shopstyle.mscustomer.dto.CustomerDTO;
-import br.com.project.shopstyle.mscustomer.dto.CustomerFORM;
-import br.com.project.shopstyle.mscustomer.dto.UpdateCustomerFORM;
-import br.com.project.shopstyle.mscustomer.dto.UpdatePasswordFORM;
+import br.com.project.shopstyle.mscustomer.dto.*;
+import br.com.project.shopstyle.mscustomer.entity.Address;
 import br.com.project.shopstyle.mscustomer.entity.Customer;
 import br.com.project.shopstyle.mscustomer.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -27,19 +26,21 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public CustomerDTO getCustomerById(Long id) {
+    public CustomerAddressDTO getCustomerById(Long id) {
         return modelMapper.map(customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer Not Found")), CustomerDTO.class);
+                .orElseThrow(() -> new RuntimeException("Customer Not Found")), CustomerAddressDTO.class);
     }
 
     @Override
     public CustomerDTO updateCustomerById(Long id, UpdateCustomerFORM updateCustomerFORM) {
         Customer customer = customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Customer Not Found"));
         String password = customer.getPassword();
+        List<Address> addresses = customer.getAddresses();
 
         customer = modelMapper.map(updateCustomerFORM, Customer.class);
         customer.setId(id);
         customer.setPassword(password);
+        customer.setAddresses(addresses);
         return modelMapper.map(customerRepository.save(customer), CustomerDTO.class);
     }
 

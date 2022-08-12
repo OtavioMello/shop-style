@@ -1,12 +1,8 @@
 package br.com.project.shopstyle.mscustomer.controller;
 
-import br.com.project.shopstyle.mscustomer.dto.CustomerDTO;
-import br.com.project.shopstyle.mscustomer.dto.CustomerFORM;
-import br.com.project.shopstyle.mscustomer.dto.UpdateCustomerFORM;
-import br.com.project.shopstyle.mscustomer.dto.UpdatePasswordFORM;
+import br.com.project.shopstyle.mscustomer.dto.*;
 import br.com.project.shopstyle.mscustomer.service.CustomerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +22,7 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerDTO> getCustomerById(@PathVariable Long id){
+    public ResponseEntity<CustomerAddressDTO> getCustomerById(@PathVariable Long id){
         return ResponseEntity.ok(customerService.getCustomerById(id));
     }
 

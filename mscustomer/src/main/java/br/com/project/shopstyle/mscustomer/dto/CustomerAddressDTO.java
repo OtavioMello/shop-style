@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data @AllArgsConstructor @NoArgsConstructor
-public class CustomerDTO {
+public class CustomerAddressDTO {
 
     private Long id;
     private String cpf;
@@ -21,5 +21,6 @@ public class CustomerDTO {
     private Date birthdate;
     private String email;
     private boolean active;
+    private List<AddressDTO> addresses;
 
 }
