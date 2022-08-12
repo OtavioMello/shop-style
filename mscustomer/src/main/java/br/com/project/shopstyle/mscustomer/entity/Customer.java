@@ -4,11 +4,8 @@ import br.com.project.shopstyle.mscustomer.constants.Genre;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity @Data @AllArgsConstructor @NoArgsConstructor

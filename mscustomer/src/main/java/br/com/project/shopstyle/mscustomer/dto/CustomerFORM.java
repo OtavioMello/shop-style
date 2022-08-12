@@ -7,8 +7,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -18,15 +21,21 @@ public class CustomerFORM {
     @CPF
     private String cpf;
     @Size(min = 3)
+    @NotBlank
     private String firstName;
     @Size(min = 3)
+    @NotBlank
     private String lastName;
+    @NotNull
     private Genre sex;
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @NotNull
     private Date birthdate;
     @Email
     private String email;
+    @NotNull
     private String password;
+    @NotNull
     private boolean active;
 
 }

@@ -1,5 +1,6 @@
 package br.com.project.shopstyle.mscustomer.service;
 
+import br.com.project.shopstyle.mscustomer.dto.CustomerDTO;
 import br.com.project.shopstyle.mscustomer.dto.CustomerFORM;
 import br.com.project.shopstyle.mscustomer.entity.Customer;
 import br.com.project.shopstyle.mscustomer.repository.CustomerRepository;
@@ -24,4 +25,11 @@ public class CustomerServiceImpl implements CustomerService{
         System.out.println(customer.toString());
         return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").build(customer.getId());
     }
+
+    @Override
+    public CustomerDTO getCustomerById(Long id) {
+        return modelMapper.map(customerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Customer Not Found")), CustomerDTO.class);
+    }
+
 }
