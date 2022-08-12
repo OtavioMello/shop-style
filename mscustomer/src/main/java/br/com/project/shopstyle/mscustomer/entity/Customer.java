@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity @Data @AllArgsConstructor @NoArgsConstructor
 public class Customer {
@@ -24,4 +25,6 @@ public class Customer {
     private String email;
     private String password;
     private boolean active;
+    @OneToMany(mappedBy = "customerId")
+    private List<Address> addresses;
 }
