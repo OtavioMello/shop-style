@@ -2,12 +2,10 @@ package br.com.project.shopstyle.mscustomer.dto;
 
 import br.com.project.shopstyle.mscustomer.constants.Genre;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

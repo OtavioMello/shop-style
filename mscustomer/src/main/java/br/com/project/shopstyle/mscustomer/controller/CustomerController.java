@@ -2,6 +2,7 @@ package br.com.project.shopstyle.mscustomer.controller;
 
 import br.com.project.shopstyle.mscustomer.dto.CustomerDTO;
 import br.com.project.shopstyle.mscustomer.dto.CustomerFORM;
+import br.com.project.shopstyle.mscustomer.dto.UpdateCustomerFORM;
 import br.com.project.shopstyle.mscustomer.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,5 +26,10 @@ public class CustomerController {
     @GetMapping("/{id}")
     public ResponseEntity<CustomerDTO> getCustomerById(@PathVariable Long id){
         return ResponseEntity.ok(customerService.getCustomerById(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CustomerDTO> updateCustomerById(@PathVariable Long id,@RequestBody @Valid UpdateCustomerFORM updateCustomerFORM){
+        return ResponseEntity.ok(customerService.updateCustomerById(id, updateCustomerFORM));
     }
 }
