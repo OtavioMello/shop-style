@@ -3,6 +3,7 @@ package br.com.project.shopstyle.mscustomer.service;
 import br.com.project.shopstyle.mscustomer.dto.CustomerDTO;
 import br.com.project.shopstyle.mscustomer.dto.CustomerFORM;
 import br.com.project.shopstyle.mscustomer.dto.UpdateCustomerFORM;
+import br.com.project.shopstyle.mscustomer.dto.UpdatePasswordFORM;
 import br.com.project.shopstyle.mscustomer.entity.Customer;
 import br.com.project.shopstyle.mscustomer.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,6 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public URI postUser(CustomerFORM customerFORM) {
-        System.out.println(customerFORM.toString());
         Customer customer = customerRepository.save(modelMapper.map(customerFORM, Customer.class));
         return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").build(customer.getId());
     }
@@ -40,6 +40,13 @@ public class CustomerServiceImpl implements CustomerService{
         customer = modelMapper.map(updateCustomerFORM, Customer.class);
         customer.setId(id);
         customer.setPassword(password);
+        return modelMapper.map(customerRepository.save(customer), CustomerDTO.class);
+    }
+
+    @Override
+    public CustomerDTO updateCustomerPassword(Long id, UpdatePasswordFORM updatePasswordFORM) {
+        Customer customer = customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Customer Not Found"));
+        customer.setPassword(updatePasswordFORM.getPassword());
         return modelMapper.map(customerRepository.save(customer), CustomerDTO.class);
     }
 
