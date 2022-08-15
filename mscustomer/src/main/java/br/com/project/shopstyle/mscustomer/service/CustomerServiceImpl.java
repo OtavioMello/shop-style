@@ -3,6 +3,7 @@ package br.com.project.shopstyle.mscustomer.service;
 import br.com.project.shopstyle.mscustomer.dto.*;
 import br.com.project.shopstyle.mscustomer.entity.Address;
 import br.com.project.shopstyle.mscustomer.entity.Customer;
+import br.com.project.shopstyle.mscustomer.exception.ObjectNotFoundException;
 import br.com.project.shopstyle.mscustomer.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -16,8 +17,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService{
 
+    public static final ObjectNotFoundException CUSTOMER_NOT_FOUND = new ObjectNotFoundException("CUSTOMER NOT FOUND");
     private final CustomerRepository customerRepository;
     private final ModelMapper modelMapper;
+
+
 
     @Override
     public URI postUser(CustomerFORM customerFORM) {
@@ -28,12 +32,12 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public CustomerAddressDTO getCustomerById(Long id) {
         return modelMapper.map(customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer Not Found")), CustomerAddressDTO.class);
+                .orElseThrow(() -> CUSTOMER_NOT_FOUND), CustomerAddressDTO.class);
     }
 
     @Override
     public CustomerDTO updateCustomerById(Long id, UpdateCustomerFORM updateCustomerFORM) {
-        Customer customer = customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Customer Not Found"));
+        Customer customer = customerRepository.findById(id).orElseThrow(() -> CUSTOMER_NOT_FOUND);
         String password = customer.getPassword();
         List<Address> addresses = customer.getAddresses();
 
@@ -46,7 +50,7 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public CustomerDTO updateCustomerPassword(Long id, UpdatePasswordFORM updatePasswordFORM) {
-        Customer customer = customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Customer Not Found"));
+        Customer customer = customerRepository.findById(id).orElseThrow(() -> CUSTOMER_NOT_FOUND);
         customer.setPassword(updatePasswordFORM.getPassword());
         return modelMapper.map(customerRepository.save(customer), CustomerDTO.class);
     }

@@ -18,10 +18,10 @@ public class CustomerFORM {
 
     @CPF
     private String cpf;
-    @Size(min = 3)
+    @Size(min = 3, max = 50)
     @NotBlank
     private String firstName;
-    @Size(min = 3)
+    @Size(min = 3, max = 70)
     @NotBlank
     private String lastName;
     @NotNull
