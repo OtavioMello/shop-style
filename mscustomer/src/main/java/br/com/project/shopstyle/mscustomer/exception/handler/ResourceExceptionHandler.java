@@ -37,8 +37,6 @@ public class ResourceExceptionHandler {
     public ResponseEntity<List<ValidationError>> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException exception){
 
         List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ArrayList<ValidationError>((
-                fieldErrors.stream().map(f -> new ValidationError(f.getField(), f.getDefaultMessage().toUpperCase())).toList())));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ArrayList<ValidationError>((fieldErrors.stream().map(f -> new ValidationError(f.getField(), f.getDefaultMessage().toUpperCase())).toList())));
     }
 }
