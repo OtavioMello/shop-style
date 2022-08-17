@@ -7,6 +7,7 @@ import br.com.project.shopstyle.mscustomer.exception.ObjectNotFoundException;
 import br.com.project.shopstyle.mscustomer.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -21,9 +22,13 @@ public class CustomerServiceImpl implements CustomerService{
     private final CustomerRepository customerRepository;
     private final ModelMapper modelMapper;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public URI postUser(CustomerFORM customerFORM) {
-        Customer customer = customerRepository.save(modelMapper.map(customerFORM, Customer.class));
+        Customer customer = modelMapper.map(customerFORM, Customer.class);
+        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
+        customerRepository.save(customer);
         return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").build(customer.getId());
     }
 

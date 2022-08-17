@@ -4,13 +4,17 @@ import br.com.project.shopstyle.mscustomer.constants.Genre;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity @Data @AllArgsConstructor @NoArgsConstructor
-public class Customer {
+public class Customer implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,4 +32,36 @@ public class Customer {
     @OneToMany
     @JoinColumn(name = "customerId", referencedColumnName = "id")
     private List<Address> addresses;
+    @OneToMany
+    private Set<Profile> profiles;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.profiles;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
