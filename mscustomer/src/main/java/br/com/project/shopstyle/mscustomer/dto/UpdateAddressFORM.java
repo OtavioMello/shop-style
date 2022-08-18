@@ -18,6 +18,8 @@ public class UpdateAddressFORM {
     @NotBlank
     private String district;
     @NotBlank
+    private String street;
+    @NotBlank
     private String number;
     @NotBlank
     private String cep;

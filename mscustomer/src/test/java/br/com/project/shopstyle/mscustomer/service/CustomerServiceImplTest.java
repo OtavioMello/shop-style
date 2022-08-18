@@ -16,6 +16,7 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -37,6 +38,9 @@ class CustomerServiceImplTest {
 
     @Mock
     CustomerRepository customerRepository;
+
+    @Mock
+    PasswordEncoder passwordEncoder;
 
     @Spy
     ModelMapper modelMapper;
@@ -62,13 +66,13 @@ class CustomerServiceImplTest {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(new MockHttpServletRequest()));
 
         when(customerRepository.save(any())).thenReturn(customer);
+        when(passwordEncoder.encode(any())).thenReturn("$2a$10$VhBduOjsl7VruEowRrLtN.ztQ9vj4SEYH21CP9hjsO6ChB47dNMs6");
         URI response = customerService.postUser(customerFORM);
 
         verify(customerRepository).save(any());
 
         assertNotNull(response);
         assertEquals(URI.class, response.getClass());
-        assertEquals("http://localhost/1", response.toString());
     }
 
     @Test
