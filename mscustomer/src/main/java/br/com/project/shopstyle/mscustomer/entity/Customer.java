@@ -1,9 +1,7 @@
 package br.com.project.shopstyle.mscustomer.entity;
 
 import br.com.project.shopstyle.mscustomer.constants.Genre;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-@Entity @Data @AllArgsConstructor @NoArgsConstructor
+@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class Customer implements UserDetails {
 
     @Id
@@ -32,7 +30,7 @@ public class Customer implements UserDetails {
     @OneToMany
     @JoinColumn(name = "customerId", referencedColumnName = "id")
     private List<Address> addresses;
-    @OneToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Profile> profiles;
 
     @Override
@@ -43,6 +41,11 @@ public class Customer implements UserDetails {
     @Override
     public String getUsername() {
         return this.email;
+    }
+
+    @Override
+    public String getPassword(){
+        return this.password;
     }
 
     @Override

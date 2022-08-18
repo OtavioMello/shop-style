@@ -6,6 +6,7 @@ import br.com.project.shopstyle.mscustomer.entity.Customer;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 
 public class CustomerBuilder {
 
@@ -20,7 +21,8 @@ public class CustomerBuilder {
                 "cleber@email.com",
                 "12345",
                 true,
-                new ArrayList<>()
+                new ArrayList<>(),
+                new HashSet<>()
         );
     }
 
@@ -35,7 +37,8 @@ public class CustomerBuilder {
                 "joao@email.com",
                 "678910",
                 true,
-                new ArrayList<>()
+                new ArrayList<>(),
+                new HashSet<>()
         );
     }
 

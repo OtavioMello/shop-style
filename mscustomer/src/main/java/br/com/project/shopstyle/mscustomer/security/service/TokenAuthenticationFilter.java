@@ -26,16 +26,15 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
         String tokenFromHeader = getTokenFromHeader(request);
         boolean tokenIsValid = tokenService.tokenIsValid(tokenFromHeader);
-
         if (tokenIsValid){
             this.authenticate(tokenFromHeader);
         }
-
+        filterChain.doFilter(request, response);
     }
 
     private String getTokenFromHeader(HttpServletRequest servletRequest){
         String token = servletRequest.getHeader("Authorization");
-        if (!token.equals(null) && token.startsWith("Bearer ")){
+        if (token != null && token.startsWith("Bearer ")){
             return token.substring(7, token.length());
         }
         return null;

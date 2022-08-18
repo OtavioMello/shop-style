@@ -7,6 +7,7 @@ import br.com.project.shopstyle.mscustomer.exception.ObjectNotFoundException;
 import br.com.project.shopstyle.mscustomer.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;

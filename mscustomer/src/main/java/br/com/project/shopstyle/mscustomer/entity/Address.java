@@ -17,6 +17,7 @@ public class Address {
     private State state;
     private String city;
     private String district;
+    private String street;
     private String number;
     private String cep;
     private String complement;

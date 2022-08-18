@@ -1,6 +1,10 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: mscustomer
+
 
   datasource:
     url: jdbc:h2:mem:customer
@@ -15,7 +19,13 @@ spring:
       enabled: true
       path: /h2-console
 
-  security:
-    jwt:
-      expiration: 15
-      secret: ,"OJc{|9zO>`jI)
+security:
+  jwt:
+    expiration: 30
+    secret: cMOjbyBjb20gZ29pYWJhZGE
+
+logging:
+  level:
+    org:
+      springframework:
+        security: trace

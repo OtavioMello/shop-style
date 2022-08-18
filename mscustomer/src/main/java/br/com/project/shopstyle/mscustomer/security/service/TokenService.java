@@ -16,30 +16,29 @@ import java.util.Date;
 public class TokenService {
 
     @Value("${security.jwt.expiration}")
-    String expirationTime;
+    String expiration;
     @Value("${security.jwt.secret}")
-    String tokenSecret;
+    String secret;
 
     public String tokenGenerator(Authentication authentication){
-
         Customer customer = (Customer) authentication.getPrincipal();
-        LocalDateTime dateNowPlusMinutes = LocalDateTime.now().plusMinutes(Long.parseLong(expirationTime));
+        LocalDateTime dateNowPlusMinutes = LocalDateTime.now().plusMinutes(Long.parseLong(expiration));
         Date expiration = Date.from(dateNowPlusMinutes.atZone(ZoneId.systemDefault()).toInstant());
 
         return Jwts.builder().setIssuer("Customer MS").setSubject(customer.getId().toString())
                 .setIssuedAt(new Date())
                 .setExpiration(expiration)
-                .signWith(SignatureAlgorithm.ES512, tokenSecret).compact();
+                .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
     public Long getIdFromToken(String tokenFromHeader){
-        Claims requisitionBody = Jwts.parser().setSigningKey(tokenSecret).parseClaimsJws(tokenFromHeader).getBody();
+        Claims requisitionBody = Jwts.parser().setSigningKey(secret).parseClaimsJws(tokenFromHeader).getBody();
         return Long.valueOf(requisitionBody.getSubject());
     }
 
     public boolean tokenIsValid(String token){
         try {
-            Jwts.parser().setSigningKey(tokenSecret).parseClaimsJws(token);
+            Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
             return true;
         }catch (Exception e){
             return false;

@@ -10,11 +10,12 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-@RequestMapping("v1/customers")
+@RequestMapping("/v1/customers")
 @RequiredArgsConstructor
 public class CustomerController {
 
     private final CustomerService customerService;
+
 
     @PostMapping
     public ResponseEntity<URI> postCustomer(@RequestBody @Valid CustomerFORM customerFORM){
