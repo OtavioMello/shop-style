@@ -1,13 +1,15 @@
 package br.com.project.shopstyle.mscatalog.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class Category {
@@ -20,6 +22,8 @@ public class Category {
     private Long parentId;
     @OneToMany
     @JoinColumn(name = "categoryId", referencedColumnName = "id")
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
+    @Transient
+    private List<Category> children = new ArrayList<>();
 
 }

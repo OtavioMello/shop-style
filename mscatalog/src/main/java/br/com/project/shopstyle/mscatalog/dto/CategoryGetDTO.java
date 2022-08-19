@@ -10,13 +10,13 @@ import lombok.Setter;
 import java.util.List;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
-public class CategoryDTO {
+public class CategoryGetDTO {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
     private String name;
     private boolean active;
-    private Long parentId;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<CategoryDTO> children;
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<CategoryGetDTO> children;
+
 }

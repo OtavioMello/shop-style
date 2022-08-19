@@ -20,8 +20,8 @@ public class Product {
     private String material;
     private boolean active;
     private Long categoryId;
-    @OneToOne
+    @OneToMany
     @JoinColumn(name = "productId", referencedColumnName = "id")
-    private Sku sku;
+    private List<Sku> sku;
 
 }
