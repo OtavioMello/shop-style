@@ -16,7 +16,6 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
-
     @PostMapping
     public ResponseEntity<URI> postCustomer(@RequestBody @Valid CustomerFORM customerFORM){
         return ResponseEntity.created(customerService.postUser(customerFORM)).build();
