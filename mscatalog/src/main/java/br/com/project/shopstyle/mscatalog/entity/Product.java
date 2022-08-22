@@ -22,6 +22,6 @@ public class Product {
     private Long categoryId;
     @OneToMany
     @JoinColumn(name = "productId", referencedColumnName = "id")
-    private List<Sku> sku;
+    private List<Sku> skus;
 
 }
