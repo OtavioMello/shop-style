@@ -21,7 +21,7 @@ public class SkuDTO {
     private String size;
     private Integer height;
     private Integer width;
-    private List<Media> images;
+    private List<MediaDTO> images;
     private Long productId;
 
 }
