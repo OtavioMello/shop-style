@@ -18,7 +18,7 @@ public class Product {
     private String description;
     private String brand;
     private String material;
-    private boolean active;
+    private Boolean active;
     private Long categoryId;
     @OneToMany
     @JoinColumn(name = "productId", referencedColumnName = "id")

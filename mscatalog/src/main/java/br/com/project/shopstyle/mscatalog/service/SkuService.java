@@ -10,4 +10,6 @@ public interface SkuService {
     URI postSku(SkuDTO skuDTO);
 
     SkuDTO updateSkuById(Long id, SkuDTO skuDTO);
+
+    void deleteSkuById(Long id);
 }

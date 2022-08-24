@@ -28,7 +28,6 @@ public class ResourceExceptionHandler {
                 exception.getMessage(),
                 request.getRequestURI()
         );
-
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(standardError);
     }
 

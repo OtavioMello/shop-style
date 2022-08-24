@@ -16,7 +16,7 @@ public class ProductGetByIdDTO {
     private String description;
     private String brand;
     private String material;
-    private boolean active;
+    private Boolean active;
     private Long categoryId;
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<SkuDTO> skus;

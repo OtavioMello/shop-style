@@ -15,7 +15,7 @@ public class CategoryGetDTO {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
     private String name;
-    private boolean active;
+    private Boolean active;
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<CategoryGetDTO> children;
 

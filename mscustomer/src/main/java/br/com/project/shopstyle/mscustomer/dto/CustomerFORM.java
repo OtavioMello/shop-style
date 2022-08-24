@@ -29,7 +29,7 @@ public class CustomerFORM {
     private Date birthdate;
     @Email
     private String email;
-    @NotNull
+    @NotBlank
     private String password;
     @NotNull
     private boolean active;

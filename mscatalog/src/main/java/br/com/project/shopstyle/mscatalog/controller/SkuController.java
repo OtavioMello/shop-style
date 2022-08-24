@@ -26,4 +26,10 @@ public class SkuController {
         return ResponseEntity.ok(skuService.updateSkuById(id, skuDTO));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteSkuById(@PathVariable Long id){
+        skuService.deleteSkuById(id);
+        return ResponseEntity.ok().build();
+    }
+
 }

@@ -21,7 +21,7 @@ public class Sku {
     private String size;
     private Integer height;
     private Integer width;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name = "skuId", referencedColumnName = "id")
     private List<Media> images;
     private Long productId;

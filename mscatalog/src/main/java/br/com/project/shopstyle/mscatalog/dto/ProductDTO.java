@@ -6,16 +6,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class ProductDTO {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
+    @NotBlank
     private String name;
+    @NotBlank
     private String description;
+    @NotBlank
     private String brand;
     private String material;
-    private boolean active;
+    @NotNull
+    private Boolean active;
+    @NotNull
     private Long categoryId;
 
 }
